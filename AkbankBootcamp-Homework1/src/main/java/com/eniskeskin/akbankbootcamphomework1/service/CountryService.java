@@ -12,18 +12,17 @@ import java.util.*;
 @Service
 public class CountryService {
 
-    CountryRepository countryRepository;
-    CountryMapper countryMapper = CountryMapper.INSTANCE;
-    //private static Map<Long, CountryDtoRequest> countryMap = new HashMap<>();
+    private final CountryRepository countryRepository;
+    private final CountryMapper countryMapper;
 
-    public CountryService(CountryRepository countryRepository) {
+    public CountryService(CountryRepository countryRepository, CountryMapper countryMapper) {
         this.countryRepository = countryRepository;
+        this.countryMapper = countryMapper;
     }
 
-    public CountryDtoResponse saveCountry(CountryDtoRequest countryDtoRequest) {
+    public Country saveCountry(CountryDtoRequest countryDtoRequest) {
         Country country = countryMapper.countryDtoRequestToCountry(countryDtoRequest);
-        countryRepository.save(country);
-        return countryMapper.countryToCountryDtoResponse(country);
+        return countryRepository.save(country);
     }
 
     public List<CountryDtoResponse> getAllCountries() {
@@ -44,7 +43,9 @@ public class CountryService {
     }
 
     public void deleteCountry(Long id) {
+        System.out.println(getCountryById(id).getName());
         Country country = countryMapper.countryDtoResponseToCountry(getCountryById(id));
+        System.out.println(country.getName());
         countryRepository.delete(country);
     }
 

@@ -5,11 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 public class Country {
 
     @Id
@@ -17,21 +20,6 @@ public class Country {
     private Long id;
     private String name;
     private String president;
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setPresident(String president) {
-        this.name = president;
-    }
-    public Long getId() {
-        return id;
-    }
-    public String getName() {
-        return name;
-    }
-    public String getPresident() {
-        return president;
-    }
 
 
 }

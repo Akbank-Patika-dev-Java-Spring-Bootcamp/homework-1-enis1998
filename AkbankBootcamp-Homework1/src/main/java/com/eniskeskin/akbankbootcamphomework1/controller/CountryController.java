@@ -2,6 +2,7 @@ package com.eniskeskin.akbankbootcamphomework1.controller;
 
 import com.eniskeskin.akbankbootcamphomework1.dto.request.CountryDtoRequest;
 import com.eniskeskin.akbankbootcamphomework1.dto.response.CountryDtoResponse;
+import com.eniskeskin.akbankbootcamphomework1.entity.Country;
 import com.eniskeskin.akbankbootcamphomework1.service.CountryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,8 @@ public class CountryController {
     }
     @PostMapping
     public ResponseEntity<CountryDtoResponse> saveCountry(@RequestBody CountryDtoRequest countryDtoRequest) {
-        CountryDtoResponse countryDtoResponse = countryService.saveCountry(countryDtoRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(countryDtoResponse);
+        Country country = countryService.saveCountry(countryDtoRequest);
+        return ResponseEntity.ok(countryService.getCountryById(country.getId()));
     }
 
     @GetMapping
